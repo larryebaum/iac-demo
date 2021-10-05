@@ -1,122 +1,20 @@
-name: Bridgecrew with Terraform Cloud
-# https://github.com/bridgecrewio/bridgecrew-action
-# https://learn.hashicorp.com/tutorials/terraform/github-actions?in=terraform/automation
-
+name: Bridgecrew
 on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-    - '.github/workflows/main.yml'
   pull_request:
-    
-  # Run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+  push:
+    branches:
+      - master
 jobs:
   scan:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8]
-    
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        
     - name: Run Bridgecrew 
       id: Bridgecrew
       uses: bridgecrewio/bridgecrew-action@master
       with:
         api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-        directory: aws/
-        # directory: terraform/simple_instance
-        # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
-        # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
-        soft_fail: true                   # optional: if true, runs checks without failing build
-        # framework: terraform            # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
-        output_format: cli                # optional: The format of the output - json - cli - sarif
-        # quiet: true                     # display only failed checks
-        # external_checks_dir: ./checkov  # directory for custom checks to be loaded
-        # download_external_modules: true # optional: download external terraform modules from public git repositories and terraform registry
-        # log_level: DEBUG                # optional: set log level. Default WARNING
-
-    - name: Run Yor action
-      uses: bridgecrewio/yor-action@main
-      with:
-        directory: terraform/simple_instance
-        output_format: cli
-   
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        terraform_wrapper: false
-    
-    - name: Run terraform fmt
-      id: fmt
-      run: |
-        cd terraform/simple_instance
-        pwd
-        ls
-        terraform fmt -check
-    
-    - name: Run terraform init
-      run: |
-        cd terraform/simple_instance
-        pwd
-        ls
-        terraform init
-      
-    - name: Run terraform validate
-      id: validate
-      run: |
-        cd terraform/simple_instance
-        pwd
-        ls
-        terraform validate -no-color
-    - name: Run terraform plan
-      id: plan
-      if: github.event_name == 'pull_request'
-      run: |
-        cd terraform/simple_instance
-        pwd
-        ls
-        terraform plan -no-color
-      continue-on-error: true
-
-    - name: Update Pull Request
-      uses: actions/github-script@0.9.0
-      if: github.event_name == 'pull_request'
-      env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-          <details><summary>Show Plan</summary>
-          \`\`\`\n
-          ${process.env.PLAN}
-          \`\`\`
-          </details>
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
-    - name: Terraform Plan Status
-      if: steps.plan.outcome == 'failure'
-      run: exit 1
-      
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        cd terraform/simple_instance
-        pwd
-        ls
-        terraform apply -auto-approve
+        directory: terraform/
