@@ -29,6 +29,7 @@ jobs:
       uses: bridgecrewio/bridgecrew-action@master
       with:
         api-key: ${{ secrets.BRIDGECREW_API_KEY }}
+        directory: aws/
         # directory: terraform/simple_instance
         # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
         # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
