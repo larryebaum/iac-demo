@@ -29,7 +29,7 @@ jobs:
       uses: bridgecrewio/bridgecrew-action@master
       with:
         api-key: ${{ secrets.BRIDGECREW_API_KEY }}
-        directory: terraform/simple_instance
+        # directory: terraform/simple_instance
         # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
         # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
         soft_fail: true                   # optional: if true, runs checks without failing build
