@@ -8,6 +8,19 @@ terraform {
   }
 }
 
+provider "google" {
+  project = "pcs-demo-322918 "
+  credentials = var.GOOGLE_CREDENTIALS
+  region = "us-central1"
+  zone = "us-central1-a"
+}
+
+variable "GOOGLE_CREDENTIALS" {
+  type = string
+  sensitive = true
+  description = "Google Cloud service account credentials"
+}
+
 resource "google_storage_bucket" "my-bucket" {
   name                        = "my-bucket"
   location                    = us-central1
