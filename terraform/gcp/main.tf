@@ -23,7 +23,7 @@ variable "GOOGLE_CREDENTIALS" {
 
 resource "google_storage_bucket" "my-bucket" {
   name                        = "my-bucket"
-  location                    = us-central1
+  location                    = "us-central1"
   force_destroy               = true
   uniform_bucket_level_access = true
   labels = {
