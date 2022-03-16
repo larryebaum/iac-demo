@@ -6,14 +6,4 @@ resource "aws_s3_bucket" "data" {
   bucket        = "my-bucket-835799"
   acl           = "public-read"
   force_destroy = true
-  tags = {
-    git_commit           = "7615def883560bd6169d34d3cbe017b3e2a4cce7"
-    git_file             = "terraform/aws/s3.tf"
-    git_last_modified_at = "2021-10-05 15:00:19"
-    git_last_modified_by = "bm.almeida@gmail.com"
-    git_modifiers        = "bm.almeida"
-    git_org              = "bmppa"
-    git_repo             = "iac-demo"
-    yor_trace            = "816b6ffa-e07f-45c6-bcd7-458cec179fa6"
-  }
 }
