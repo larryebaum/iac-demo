@@ -1,0 +1,42 @@
+
+name: Prisma Cloud Code Security
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - ".github/workflows/*"
+      - "**/README.md"
+  push:
+    branches: [main]
+    paths-ignore:
+      - ".github/workflows/*"
+      - "**/README.md"
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Bridgecrew
+      id: Bridgecrew
+      uses: bridgecrewio/bridgecrew-action@master
+      env:
+          PRISMA_API_URL: https://api.prismacloud.io
+      with:
+        api-key: ${{ secrets.PRISMA_CLOUD_API_KEY }}
+        directory: terraform/
+        # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
+        # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
+        soft_fail: true                   # optional: if true, runs checks without failing build
+        # framework: terraform            # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+        output_format: cli                # optional: The format of the output - json - cli - sarif
+        # quiet: true                     # display only failed checks
+        # external_checks_dir: ./checkov  # directory for custom checks to be loaded
+        # download_external_modules: true # optional: download external terraform modules from public git repositories and terraform registry
+        # log_level: DEBUG                # optional: set log level. Default WARNING
