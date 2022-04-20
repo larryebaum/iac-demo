@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+   name: webportal
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: nginx-deploy
+ namespace: webportal
+ labels:
+   dep: nginxdep
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: nginx
+  template:
+    metadata:
+      labels:
+        name: nginx
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: nginx
+        image: nginx@sha256:fcc42aef11edacef6408663bb3e8ebb0f83cf1d958a0cb97973106cb7f618e49
+        securityContext:
+          allowPrivilegeEscalation: false
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+          requests:
+            memory: 256Mi
+            cpu: 250m
+        ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+  namespace: webportal
+spec:
+  selector:
+    name: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
