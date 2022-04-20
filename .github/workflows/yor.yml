@@ -2,7 +2,15 @@ name: IaC tag and trace
 
 on:
   push:
+    branches: [main]
+    paths-ignore:
+      - ".github/workflows/*"
+      - "**/README.md"
   pull_request:
+    branches: [main]
+    paths-ignore:
+      - ".github/workflows/*"
+      - "**/README.md"
 
 jobs:
   yor:
