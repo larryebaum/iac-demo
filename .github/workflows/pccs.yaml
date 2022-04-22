@@ -23,8 +23,7 @@ jobs:
         python-version: [3.8]
     steps:
     - uses: actions/checkout@v2
-    - name: Run Bridgecrew
-      id: Bridgecrew
+    - name: Run Prisma Cloud Code Security
       uses: bridgecrewio/bridgecrew-action@master
       env:
           PRISMA_API_URL: https://api.prismacloud.io
