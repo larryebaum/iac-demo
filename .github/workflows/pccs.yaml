@@ -32,7 +32,7 @@ jobs:
         directory: terraform/
         # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
         # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
-        soft_fail: true                   # optional: if true, runs checks without failing build
+        soft_fail: false                  # optional: if true, runs checks without failing build
         # framework: terraform            # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
         output_format: cli                # optional: The format of the output - json - cli - sarif
         # quiet: true                     # display only failed checks
