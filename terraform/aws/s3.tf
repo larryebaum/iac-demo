@@ -4,6 +4,6 @@ resource "aws_s3_bucket" "data" {
   # bucket does not have access logs
   # bucket does not have versioning
   bucket        = "my-bucket-835799"
-  acl           = "public-read"
+  acl           = "private"
   force_destroy = true
 }
