@@ -17,3 +17,12 @@ resource "aws_s3_bucket" "data" {
     yor_trace            = "8cebc6f3-14b0-4a60-bd65-7988a2c206f1"
   }
 }
+
+
+resource "aws_s3_bucket_versioning" "data" {
+  bucket = aws_s3_bucket.data.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
