@@ -6,4 +6,3 @@ resource "aws_s3_bucket" "public_bucket" {
     Privacy = "public"
     Proj    = "prisma-cloud-pov"
   }
-}
