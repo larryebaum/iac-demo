@@ -5,5 +5,6 @@ resource "aws_s3_bucket" "public_bucket" {
   tags = {
     Privacy   = "public"
     Proj      = "prisma-cloud-pov"
+    yor_trace = "b8d57c0d-7a82-4b19-8e5d-ca372b327aa8"
   }
 }
