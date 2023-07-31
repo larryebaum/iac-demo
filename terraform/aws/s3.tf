@@ -13,5 +13,6 @@ resource "aws_s3_bucket" "public_bucket" {
     git_org              = "bmppa"
     git_repo             = "iac-demo"
     yor_trace            = "44ae1e94-f927-4080-b773-680933278250"
+    yor_name             = "public_bucket"
   }
 }
