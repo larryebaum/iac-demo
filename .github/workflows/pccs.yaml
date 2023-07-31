@@ -26,7 +26,7 @@ jobs:
     - name: Run Prisma Cloud Code Security
       uses: bridgecrewio/bridgecrew-action@master
       env:
-          PRISMA_API_URL: https://api.prismacloud.io
+          PRISMA_API_URL: https://api3.prismacloud.io
       with:
         api-key: ${{ secrets.PRISMA_CLOUD_API_KEY }}
         directory: terraform/
