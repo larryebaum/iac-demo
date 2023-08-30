@@ -15,5 +15,6 @@ resource "aws_s3_bucket" "data" {
     git_org              = "bmppa"
     git_repo             = "iac-demo"
     yor_trace            = "8cebc6f3-14b0-4a60-bd65-7988a2c206f1"
+    Privacy              = ""
   }
 }
