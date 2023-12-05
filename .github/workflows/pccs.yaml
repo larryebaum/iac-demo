@@ -26,9 +26,9 @@ jobs:
     - name: Run Prisma Cloud Code Security
       uses: bridgecrewio/bridgecrew-action@master
       env:
-          PRISMA_API_URL: https://api.prismacloud.io
+          PRISMA_API_URL: https://api3.prismacloud.io
       with:
-        api-key: ${{ secrets.PRISMA_CLOUD_API_KEY }}
+        api-key: ${{ secrets.PC_SANDBOX_WEST_API_KEY }}
         directory: terraform/
         # check: CKV_AWS_1                # optional: run only a specific check_id. can be comma separated list
         # skip_check: CKV_AWS_1           # optional: skip a specific check_id. can be comma separated list
