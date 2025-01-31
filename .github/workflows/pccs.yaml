@@ -2,16 +2,11 @@
 name: Prisma Cloud Code Security
 on:
   pull_request:
-    branches: [main]
-    paths-ignore:
-      - ".github/workflows/*"
-      - "**/README.md"
+    branches: '**'
+
   push:
-    branches: [main]
-    paths-ignore:
-      - ".github/workflows/*"
-      - "**/README.md"
-  
+    branches: '**'
+    
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
