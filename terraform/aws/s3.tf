@@ -18,3 +18,4 @@ resource "aws_s3_bucket" "data" {
     yor_name             = "data"
   }
 }
+
