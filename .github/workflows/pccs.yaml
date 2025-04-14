@@ -2,8 +2,8 @@
 name: Prisma Cloud Code Security
 on:
   # Run this workflow automatically on all branches
-  pull_request:
-    branches: '**'
+  # pull_request:
+  #   branches: '**'
 
   # Run this workflow automatically on all branches
   push:
