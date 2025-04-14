@@ -1,27 +1,27 @@
-name: IaC tag and trace
+# name: IaC tag and trace
 
-on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - ".github/workflows/*"
-      - "**/README.md"
-  pull_request:
-    branches: [main]
-    paths-ignore:
-      - ".github/workflows/*"
-      - "**/README.md"
+# on:
+#   push:
+#     branches: [main]
+#     paths-ignore:
+#       - ".github/workflows/*"
+#       - "**/README.md"
+#   pull_request:
+#     branches: [main]
+#     paths-ignore:
+#       - ".github/workflows/*"
+#       - "**/README.md"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
 
-jobs:
-  yor:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        name: Checkout repo
-        with:
-          fetch-depth: 0
-      - name: Run yor action
-        uses: bridgecrewio/yor-action@main
+# jobs:
+#   yor:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#         name: Checkout repo
+#         with:
+#           fetch-depth: 0
+#       - name: Run yor action
+#         uses: bridgecrewio/yor-action@main
